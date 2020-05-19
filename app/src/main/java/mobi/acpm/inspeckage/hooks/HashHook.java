@@ -1,5 +1,7 @@
 package mobi.acpm.inspeckage.hooks;
 
+import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 
@@ -64,7 +66,9 @@ public class HashHook extends XC_MethodHook {
 
                 sb.append(Util.toHexString((byte[]) param.getResult())+"]");
 
-                XposedBridge.log(TAG + sb.toString());
+                String stacka=Log.getStackTraceString(new Throwable());
+                String stackb=stacka.replace(System.getProperty("line.separator"), "<br>");
+                XposedBridge.log(TAG + sb.toString()+ "<br>"+stackb);
                 sb = new StringBuffer();
             }
         });

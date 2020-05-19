@@ -1,5 +1,7 @@
 package mobi.acpm.inspeckage.hooks;
 
+import android.util.Log;
+
 import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
@@ -45,7 +47,10 @@ public class CryptoHook extends XC_MethodHook {
                 sb.append(" (" + Util.byteArrayToString((byte[]) param.args[0]) + " , ");
                 sb.append(Util.byteArrayToString((byte[]) param.getResult()) + ")");
 
-                XposedBridge.log(TAG + sb.toString());
+                String stacka= Log.getStackTraceString(new Throwable());
+                String stackb=stacka.replace(System.getProperty("line.separator"), "<br>");
+                XposedBridge.log(TAG + sb.toString()+ "<br>"+stackb);
+                //XposedBridge.log(TAG + sb.toString());
                 sb = new StringBuffer();
             }
 
